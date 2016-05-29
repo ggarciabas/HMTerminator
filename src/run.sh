@@ -1,2 +1,2 @@
 make
-./now
+./now.app
