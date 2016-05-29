@@ -1,6 +1,7 @@
 
 #include "tela.h"
 #include "include.h"
+#include "mapa.h"
 
 void limpar_tela () {
 	system(COMANDO_LIMPAR_TELA);
@@ -91,7 +92,9 @@ void borda_principal () {
 	}
 
 	ponto_tela		(LARGURA-12, INICIO+2);
-	printf 			("    HORA");
+	printf 			("HORA: %02d:%02d", 10, 15);
+	ponto_tela		(LARGURA-12, INICIO+3);
+	printf 			("POS.:(%02d,%02d)", 10, 15);
 	ponto_tela		(LARGURA-12, INICIO+5);
 	printf 			("    GRANA");
 }
