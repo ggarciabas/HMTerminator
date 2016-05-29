@@ -10,92 +10,92 @@ void limpar_tela () {
 void borda_principal () {
 	int i;
 
-	ponto_tela	(INICIO, INICIO);
+	ponto_tela	(INICIO_TELA, INICIO_TELA);
 	printf 		("%c", BORDA_DIAGONAL);
-	ponto_tela	(LARGURA, INICIO);
+	ponto_tela	(LARGURA_TELA, INICIO_TELA);
 	printf 		("%c", BORDA_DIAGONAL);
-	ponto_tela	(INICIO, ALTURA);
+	ponto_tela	(INICIO_TELA, ALTURA_TELA);
 	printf 		("%c", BORDA_DIAGONAL);
-	ponto_tela	(LARGURA, ALTURA);
+	ponto_tela	(LARGURA_TELA, ALTURA_TELA);
 	printf 		("%c", BORDA_DIAGONAL);
 
-	for (i = INICIO+1; i < ALTURA; ++i)
+	for (i = INICIO_TELA+1; i < ALTURA_TELA; ++i)
 	{
-		ponto_tela	(INICIO, i);
+		ponto_tela	(INICIO_TELA, i);
 		printf 		("%c", BORDA_VERTICAL);
-		ponto_tela 	(LARGURA, i);
+		ponto_tela 	(LARGURA_TELA, i);
 		printf 		("%c", BORDA_VERTICAL);
 	}
 
-	for (i = INICIO+1; i < LARGURA; ++i)
+	for (i = INICIO_TELA+1; i < LARGURA_TELA; ++i)
 	{
-		ponto_tela 	(i, INICIO); 
+		ponto_tela 	(i, INICIO_TELA); 
 		printf 		("%c", BORDA_HORIZONTAL);
-		ponto_tela 	(i, ALTURA);
+		ponto_tela 	(i, ALTURA_TELA);
 		printf 		("%c", BORDA_HORIZONTAL);
 	}
 
-	for (i = INICIO+1; i < ALTURA-4; ++i) {
-		ponto_tela 	(LARGURA-13, INICIO+i);
+	for (i = INICIO_TELA+1; i < ALTURA_TELA-4; ++i) {
+		ponto_tela 	(LARGURA_TELA-13, INICIO_TELA+i);
 		printf 		("%c", BORDA_VERTICAL);
 	}
 
-	ponto_tela 	(LARGURA-13, INICIO+1);
+	ponto_tela 	(LARGURA_TELA-13, INICIO_TELA+1);
 	printf 		("%c", BORDA_DIAGONAL);
-	ponto_tela 	(LARGURA-13, INICIO+4);
+	ponto_tela 	(LARGURA_TELA-13, INICIO_TELA+4);
 	printf 		("%c", BORDA_DIAGONAL);
-	ponto_tela 	(LARGURA, INICIO+1);
+	ponto_tela 	(LARGURA_TELA, INICIO_TELA+1);
 	printf 		("%c", BORDA_DIAGONAL);
-	ponto_tela 	(LARGURA, INICIO+4);
-	printf 		("%c", BORDA_DIAGONAL);
-
-	ponto_tela 	(LARGURA-13, INICIO+7);
-	printf 		("%c", BORDA_DIAGONAL);
-	ponto_tela 	(LARGURA, INICIO+7);
+	ponto_tela 	(LARGURA_TELA, INICIO_TELA+4);
 	printf 		("%c", BORDA_DIAGONAL);
 
-	ponto_tela 	(LARGURA-13, INICIO+8);
+	ponto_tela 	(LARGURA_TELA-13, INICIO_TELA+7);
 	printf 		("%c", BORDA_DIAGONAL);
-	ponto_tela 	(LARGURA, INICIO+8);
-	printf 		("%c", BORDA_DIAGONAL);
-
-	ponto_tela 	(LARGURA-13, INICIO+20);
-	printf 		("%c", BORDA_DIAGONAL);
-	ponto_tela 	(LARGURA, INICIO+20);
+	ponto_tela 	(LARGURA_TELA, INICIO_TELA+7);
 	printf 		("%c", BORDA_DIAGONAL);
 
-	ponto_tela 	(INICIO, INICIO+21);
+	ponto_tela 	(LARGURA_TELA-13, INICIO_TELA+8);
 	printf 		("%c", BORDA_DIAGONAL);
-	ponto_tela 	(LARGURA, INICIO+21);
+	ponto_tela 	(LARGURA_TELA, INICIO_TELA+8);
 	printf 		("%c", BORDA_DIAGONAL);
 
-	for (i = INICIO; i < 13; ++i) {
-		ponto_tela 	(LARGURA-i, INICIO+1);
+	ponto_tela 	(LARGURA_TELA-13, INICIO_TELA+20);
+	printf 		("%c", BORDA_DIAGONAL);
+	ponto_tela 	(LARGURA_TELA, INICIO_TELA+20);
+	printf 		("%c", BORDA_DIAGONAL);
+
+	ponto_tela 	(INICIO_TELA, INICIO_TELA+21);
+	printf 		("%c", BORDA_DIAGONAL);
+	ponto_tela 	(LARGURA_TELA, INICIO_TELA+21);
+	printf 		("%c", BORDA_DIAGONAL);
+
+	for (i = INICIO_TELA; i < 13; ++i) {
+		ponto_tela 	(LARGURA_TELA-i, INICIO_TELA+1);
 		printf 		("%c", BORDA_HORIZONTAL);
 
-		ponto_tela 	(LARGURA-i, INICIO+4);
+		ponto_tela 	(LARGURA_TELA-i, INICIO_TELA+4);
 		printf 		("%c", BORDA_HORIZONTAL);
 
-		ponto_tela 	(LARGURA-i, INICIO+7);
+		ponto_tela 	(LARGURA_TELA-i, INICIO_TELA+7);
 		printf 		("%c", BORDA_HORIZONTAL);
 
-		ponto_tela 	(LARGURA-i, INICIO+8);
+		ponto_tela 	(LARGURA_TELA-i, INICIO_TELA+8);
 		printf 		("%c", BORDA_HORIZONTAL);
 
-		ponto_tela 	(LARGURA-i, INICIO+20);
-		printf 		("%c", BORDA_HORIZONTAL);
-	}
-
-	for (i = INICIO+1; i < LARGURA; ++i) {
-		ponto_tela 	(i, ALTURA-3);
+		ponto_tela 	(LARGURA_TELA-i, INICIO_TELA+20);
 		printf 		("%c", BORDA_HORIZONTAL);
 	}
 
-	ponto_tela		(LARGURA-12, INICIO+2);
+	for (i = INICIO_TELA+1; i < LARGURA_TELA; ++i) {
+		ponto_tela 	(i, ALTURA_TELA-3);
+		printf 		("%c", BORDA_HORIZONTAL);
+	}
+
+	ponto_tela		(LARGURA_TELA-12, INICIO_TELA+2);
 	printf 			("HORA: %02d:%02d", 10, 15);
-	ponto_tela		(LARGURA-12, INICIO+3);
+	ponto_tela		(LARGURA_TELA-12, INICIO_TELA+3);
 	printf 			("POS.:(%02d,%02d)", 10, 15);
-	ponto_tela		(LARGURA-12, INICIO+5);
+	ponto_tela		(LARGURA_TELA-12, INICIO_TELA+5);
 	printf 			("    GRANA");
 }
 

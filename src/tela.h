@@ -2,9 +2,9 @@
 #ifndef TELA_H_
 #define TELA_H_
 
-	#define ALTURA 				25
-	#define LARGURA				80
-	#define INICIO				1
+	#define ALTURA_TELA			25
+	#define LARGURA_TELA		80
+	#define INICIO_TELA			1
 
 	#define BORDA_VERTICAL 		'|'
 	#define BORDA_HORIZONTAL 	'-' 
