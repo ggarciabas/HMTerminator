@@ -4,10 +4,14 @@
 */
 
 #include "include.h"
+#include "tela.h"
 
 int main () {
 
-	printf("Hello World\n");
+	limpar_tela();
+	borda_principal();
+
+	ponto_tela(1,26); // para finalizar
 
 	return 0;
 }
