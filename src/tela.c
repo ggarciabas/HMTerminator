@@ -104,3 +104,30 @@ void ponto_tela (int x, int y) // coluna (x) por linha (y)
    printf("%c[%d;%df",0x1B,y,x);
    fflush(stdout);
 }
+
+void imprimir_mapa () {
+	int i, j;
+
+	for (j = INICIO_MAPA_TELA; j <= ALTURA_MAPA_TELA; ++j) {
+		for (i = INICIO_MAPA_TELA; i <= LARGURA_MAPA_TELA; ++i) {
+			ponto_tela		(INICIO_TELA+1+((i-1)*5), INICIO_TELA+1+((j-1)*4));
+			printf 			("%c%c%c%c%c", BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO);
+
+			ponto_tela		(INICIO_TELA+1+((i-1)*5), INICIO_TELA+1+((j-1)*4)+1);
+			printf 			("%c %c %c", BORDA_MAPA_2PONTOS, mapa_jogo[i+(mapa_tela_x-1)][j+(mapa_tela_y-1)].letra, BORDA_MAPA_2PONTOS);
+
+			ponto_tela		(INICIO_TELA+1+((i-1)*5), INICIO_TELA+1+((j-1)*4)+2);
+			printf 			("%c%03.0lf%c", BORDA_MAPA_2PONTOS, mapa_jogo[i+(mapa_tela_x-1)][j+(mapa_tela_y-1)].porcentagem, BORDA_MAPA_2PONTOS);
+
+			ponto_tela		(INICIO_TELA+1+((i-1)*5), INICIO_TELA+1+((j-1)*4)+3);
+			printf 			("%c%c%c%c%c", BORDA_MAPA_2PONTOS, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_2PONTOS);
+		}
+	}
+}
+
+
+
+
+
+
+
