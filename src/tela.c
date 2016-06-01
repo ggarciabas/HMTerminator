@@ -2,6 +2,142 @@
 #include "tela.h"
 #include "include.h"
 #include "mapa.h"
+#include "jogador.h"
+
+void mover_acima () {
+	// Verificar se ultrapassou o limite mapa-tela, pois assim deve-se andar no mapa macro
+	if ((j_tela_mapa_y-1/*mover_acima*/) < 0) { 
+		// Verificar se pode andar dentro do mapa maior,
+		// 		verificar se não ultrapassou o limite do mapa
+		if ((mapa_tela_y-1/*mover_acima*/) >= 0) { // verificando se a nova posição do mapa é válida 
+			mapa_tela_y--; // subiu
+			imprimir_mapa		(); // atualizando mapa
+			atualizar_posicao	(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+			celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
+		} else {
+			// Log	
+		}
+	} else {
+		// Pode posicionar acima sem problemas
+		celula_normal	(j_tela_mapa_x, j_tela_mapa_y);
+		j_tela_mapa_y--; // subiu
+		atualizar_posicao		(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+		celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
+	}
+}
+
+void mover_abaixo () {
+	// Verificar se ultrapassou o limite mapa-tela, pois assim deve-se andar no mapa macro
+	if ((j_tela_mapa_y+1/*mover_abaixo*/) >= ALTURA_MAPA_TELA) { 
+		// Verificar se pode andar dentro do mapa maior,
+		// 		verificar se não ultrapassou o limite do mapa
+		if ((mapa_tela_y+j_tela_mapa_y/*mover_abaixo*/) < ALTURA_MAPA-1) { // verificando se a nova posição do mapa é válida 
+			mapa_tela_y++; // desceu
+			imprimir_mapa		(); // atualizando mapa
+			atualizar_posicao	(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+			celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
+		} else {
+			// Log	
+		}
+	} else {
+		// Pode posicionar acima sem problemas
+		celula_normal	(j_tela_mapa_x, j_tela_mapa_y);
+		j_tela_mapa_y++; // desceu
+		atualizar_posicao		(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+		celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
+	}
+}
+
+void mover_direita () {
+	// Verificar se ultrapassou o limite mapa-tela, pois assim deve-se andar no mapa macro
+	if ((j_tela_mapa_x+1/*mover_abaixo*/) >= LARGURA_MAPA_TELA) { 
+		// Verificar se pode andar dentro do mapa maior,
+		// 		verificar se não ultrapassou o limite do mapa
+		if ((mapa_tela_x+j_tela_mapa_x/*mover_abaixo*/) < LARGURA_MAPA-1) { // verificando se a nova posição do mapa é válida 
+			mapa_tela_x++; // foi para direita
+			imprimir_mapa		(); // atualizando mapa
+			atualizar_posicao	(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+			celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
+		} else {
+			// Log	
+		}
+	} else {
+		// Pode posicionar acima sem problemas
+		celula_normal	(j_tela_mapa_x, j_tela_mapa_y);
+		j_tela_mapa_x++; // foi para direita
+		atualizar_posicao		(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+		celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
+	}
+}
+
+void mover_esquerda () {
+	// Verificar se ultrapassou o limite mapa-tela, pois assim deve-se andar no mapa macro
+	if ((j_tela_mapa_x-1/*mover_acima*/) < 0) { 
+		// Verificar se pode andar dentro do mapa maior,
+		// 		verificar se não ultrapassou o limite do mapa
+		if ((mapa_tela_x-1/*mover_acima*/) >= 0) { // verificando se a nova posição do mapa é válida 
+			mapa_tela_x--; // foi para esquerda
+			imprimir_mapa		(); // atualizando mapa
+			atualizar_posicao	(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+			celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
+		} else {
+			// Log	
+		}
+	} else {
+		// Pode posicionar acima sem problemas
+		celula_normal	(j_tela_mapa_x, j_tela_mapa_y);
+		j_tela_mapa_x--; // foi para esquerda
+		atualizar_posicao		(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+		celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
+	}
+}
+
+void celula_normal (int x, int y) {
+	x++; y++;
+	pthread_mutex_lock(&m);
+	{
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4));
+		printf 			("%c%c%c%c%c", BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO);
+
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4)+1);
+		printf 			("%c %c %c", BORDA_MAPA_2PONTOS, mapa_jogo[x+(mapa_tela_x-1)][y+(mapa_tela_y-1)].letra, BORDA_MAPA_2PONTOS);
+
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4)+2);
+		printf 			("%c%03.0lf%c", BORDA_MAPA_2PONTOS, mapa_jogo[x+(mapa_tela_x-1)][y+(mapa_tela_y-1)].porcentagem, BORDA_MAPA_2PONTOS);
+
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4)+3);
+		printf 			("%c%c%c%c%c", BORDA_MAPA_2PONTOS, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_2PONTOS);
+	}
+	pthread_mutex_unlock(&m);
+}
+
+void celula_selecionada (int x, int y) {
+	x++; y++;
+	pthread_mutex_lock(&m);
+	{
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4));
+		printf 			("%c%c%c%c%c", BORDA_SELECAO, BORDA_SELECAO, BORDA_SELECAO, BORDA_SELECAO, BORDA_SELECAO);
+
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4)+1);
+		printf 			("%c %c %c", BORDA_SELECAO, mapa_jogo[x+(mapa_tela_x-1)][y+(mapa_tela_y-1)].letra, BORDA_SELECAO);
+
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4)+2);
+		printf 			("%c%03.0lf%c", BORDA_SELECAO, mapa_jogo[x+(mapa_tela_x-1)][y+(mapa_tela_y-1)].porcentagem, BORDA_SELECAO);
+
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4)+3);
+		printf 			("%c%c%c%c%c", BORDA_SELECAO, BORDA_SELECAO, BORDA_SELECAO, BORDA_SELECAO, BORDA_SELECAO);
+	}
+	pthread_mutex_unlock(&m);
+}
+
+void atualizar_posicao (int x, int y) {
+	pthread_mutex_lock(&m);
+	{
+		ponto_tela		(LARGURA_TELA-12, INICIO_TELA+3);
+		printf 			("POS.:(%02d,%02d)", x+1, y+1);
+	}
+	pthread_mutex_unlock(&m);
+}
 
 void limpar_tela () {
 	system(COMANDO_LIMPAR_TELA);
@@ -108,21 +244,25 @@ void ponto_tela (int x, int y) // coluna (x) por linha (y)
 void imprimir_mapa () {
 	int i, j;
 
-	for (j = INICIO_MAPA_TELA; j <= ALTURA_MAPA_TELA; ++j) {
-		for (i = INICIO_MAPA_TELA; i <= LARGURA_MAPA_TELA; ++i) {
-			ponto_tela		(INICIO_TELA+1+((i-1)*5), INICIO_TELA+1+((j-1)*4));
-			printf 			("%c%c%c%c%c", BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO);
+	pthread_mutex_lock(&m);
+	{
+		for (j = INICIO_MAPA_TELA; j <= ALTURA_MAPA_TELA; ++j) {
+			for (i = INICIO_MAPA_TELA; i <= LARGURA_MAPA_TELA; ++i) {
+				ponto_tela		(INICIO_TELA+1+((i-1)*5), INICIO_TELA+1+((j-1)*4));
+				printf 			("%c%c%c%c%c", BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO);
 
-			ponto_tela		(INICIO_TELA+1+((i-1)*5), INICIO_TELA+1+((j-1)*4)+1);
-			printf 			("%c %c %c", BORDA_MAPA_2PONTOS, mapa_jogo[i+(mapa_tela_x-1)][j+(mapa_tela_y-1)].letra, BORDA_MAPA_2PONTOS);
+				ponto_tela		(INICIO_TELA+1+((i-1)*5), INICIO_TELA+1+((j-1)*4)+1);
+				printf 			("%c %c %c", BORDA_MAPA_2PONTOS, mapa_jogo[i+(mapa_tela_x-1)][j+(mapa_tela_y-1)].letra, BORDA_MAPA_2PONTOS);
 
-			ponto_tela		(INICIO_TELA+1+((i-1)*5), INICIO_TELA+1+((j-1)*4)+2);
-			printf 			("%c%03.0lf%c", BORDA_MAPA_2PONTOS, mapa_jogo[i+(mapa_tela_x-1)][j+(mapa_tela_y-1)].porcentagem, BORDA_MAPA_2PONTOS);
+				ponto_tela		(INICIO_TELA+1+((i-1)*5), INICIO_TELA+1+((j-1)*4)+2);
+				printf 			("%c%03.0lf%c", BORDA_MAPA_2PONTOS, mapa_jogo[i+(mapa_tela_x-1)][j+(mapa_tela_y-1)].porcentagem, BORDA_MAPA_2PONTOS);
 
-			ponto_tela		(INICIO_TELA+1+((i-1)*5), INICIO_TELA+1+((j-1)*4)+3);
-			printf 			("%c%c%c%c%c", BORDA_MAPA_2PONTOS, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_2PONTOS);
+				ponto_tela		(INICIO_TELA+1+((i-1)*5), INICIO_TELA+1+((j-1)*4)+3);
+				printf 			("%c%c%c%c%c", BORDA_MAPA_2PONTOS, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_2PONTOS);
+			}
 		}
 	}
+	pthread_mutex_unlock(&m);
 }
 
 
