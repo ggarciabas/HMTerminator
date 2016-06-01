@@ -13,13 +13,16 @@ void mover_acima () {
 			mapa_tela_y--; // subiu
 			imprimir_mapa		(); // atualizando mapa
 			atualizar_posicao	(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+			celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
 		} else {
 			// Log	
 		}
 	} else {
 		// Pode posicionar acima sem problemas
+		celula_normal	(j_tela_mapa_x, j_tela_mapa_y);
 		j_tela_mapa_y--; // subiu
 		atualizar_posicao		(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+		celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
 	}
 }
 
@@ -32,13 +35,16 @@ void mover_abaixo () {
 			mapa_tela_y++; // desceu
 			imprimir_mapa		(); // atualizando mapa
 			atualizar_posicao	(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+			celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
 		} else {
 			// Log	
 		}
 	} else {
 		// Pode posicionar acima sem problemas
+		celula_normal	(j_tela_mapa_x, j_tela_mapa_y);
 		j_tela_mapa_y++; // desceu
 		atualizar_posicao		(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+		celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
 	}
 }
 
@@ -51,13 +57,16 @@ void mover_direita () {
 			mapa_tela_x++; // foi para direita
 			imprimir_mapa		(); // atualizando mapa
 			atualizar_posicao	(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+			celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
 		} else {
 			// Log	
 		}
 	} else {
 		// Pode posicionar acima sem problemas
+		celula_normal	(j_tela_mapa_x, j_tela_mapa_y);
 		j_tela_mapa_x++; // foi para direita
 		atualizar_posicao		(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+		celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
 	}
 }
 
@@ -70,14 +79,55 @@ void mover_esquerda () {
 			mapa_tela_x--; // foi para esquerda
 			imprimir_mapa		(); // atualizando mapa
 			atualizar_posicao	(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+			celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
 		} else {
 			// Log	
 		}
 	} else {
 		// Pode posicionar acima sem problemas
+		celula_normal	(j_tela_mapa_x, j_tela_mapa_y);
 		j_tela_mapa_x--; // foi para esquerda
 		atualizar_posicao		(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+		celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
 	}
+}
+
+void celula_normal (int x, int y) {
+	x++; y++;
+	pthread_mutex_lock(&m);
+	{
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4));
+		printf 			("%c%c%c%c%c", BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO);
+
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4)+1);
+		printf 			("%c %c %c", BORDA_MAPA_2PONTOS, mapa_jogo[x+(mapa_tela_x-1)][y+(mapa_tela_y-1)].letra, BORDA_MAPA_2PONTOS);
+
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4)+2);
+		printf 			("%c%03.0lf%c", BORDA_MAPA_2PONTOS, mapa_jogo[x+(mapa_tela_x-1)][y+(mapa_tela_y-1)].porcentagem, BORDA_MAPA_2PONTOS);
+
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4)+3);
+		printf 			("%c%c%c%c%c", BORDA_MAPA_2PONTOS, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_PONTO, BORDA_MAPA_2PONTOS);
+	}
+	pthread_mutex_unlock(&m);
+}
+
+void celula_selecionada (int x, int y) {
+	x++; y++;
+	pthread_mutex_lock(&m);
+	{
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4));
+		printf 			("%c%c%c%c%c", BORDA_SELECAO, BORDA_SELECAO, BORDA_SELECAO, BORDA_SELECAO, BORDA_SELECAO);
+
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4)+1);
+		printf 			("%c %c %c", BORDA_SELECAO, mapa_jogo[x+(mapa_tela_x-1)][y+(mapa_tela_y-1)].letra, BORDA_SELECAO);
+
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4)+2);
+		printf 			("%c%03.0lf%c", BORDA_SELECAO, mapa_jogo[x+(mapa_tela_x-1)][y+(mapa_tela_y-1)].porcentagem, BORDA_SELECAO);
+
+		ponto_tela		(INICIO_TELA+1+((x-1)*5), INICIO_TELA+1+((y-1)*4)+3);
+		printf 			("%c%c%c%c%c", BORDA_SELECAO, BORDA_SELECAO, BORDA_SELECAO, BORDA_SELECAO, BORDA_SELECAO);
+	}
+	pthread_mutex_unlock(&m);
 }
 
 void atualizar_posicao (int x, int y) {

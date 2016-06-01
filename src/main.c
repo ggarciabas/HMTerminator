@@ -12,7 +12,7 @@
 // primeira e única declaração - EXTERN
 CELULA mapa_jogo[LARGURA_MAPA][ALTURA_MAPA]; 
 int mapa_tela_x=0; // primeira posição em relação ao mapa_jogo
-int mapa_tela_y=15; // para tela (0, 0) qual posição (x, y) do mapa_jogo está sendo impressa
+int mapa_tela_y=0; // para tela (0, 0) qual posição (x, y) do mapa_jogo está sendo impressa
 pthread_mutex_t m = PTHREAD_MUTEX_INITIALIZER;
 struct termios old, new;
 int j_tela_mapa_x;
@@ -29,6 +29,7 @@ int main () {
 	criar_jogo_teste 	();
 	imprimir_mapa		();
 	atualizar_posicao	(mapa_tela_x+j_tela_mapa_x, mapa_tela_y+j_tela_mapa_y); // atualizando posicao
+	celula_selecionada	(j_tela_mapa_x, j_tela_mapa_y);
 
 	pthread_create 		(&t_ler_comando, NULL, ler_comando, NULL);
 

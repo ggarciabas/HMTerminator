@@ -16,6 +16,7 @@
 
 	#define BORDA_MAPA_2PONTOS	':'
 	#define BORDA_MAPA_PONTO	'.'
+	#define BORDA_SELECAO		'='
 
 	#define COMANDO_LIMPAR_TELA "reset"
 
@@ -31,5 +32,7 @@
 
 	void atualizar_posicao		(int, int);
 
+	void celula_normal			(int, int);
+	void celula_selecionada		(int, int);		
 
 #endif // TELA_H_
