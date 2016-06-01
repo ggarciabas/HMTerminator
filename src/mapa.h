@@ -2,12 +2,13 @@
 #ifndef MAPA_H_
 #define MAPA_H_
 
-	#define LARGURA_MAPA	50
-	#define ALTURA_MAPA		50
+	#define LARGURA_MAPA	20
+	#define ALTURA_MAPA		20
 	#define INICIO_MAPA		0
 	
 	typedef enum Tipo {
 		AREIA,
+		PEDRA,
 	} TIPO;
 
 	typedef struct Celula {

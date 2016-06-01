@@ -24,4 +24,12 @@
 	void limpar_tela 			();
 	void imprimir_mapa 			();
 
+	void mover_acima			();
+	void mover_abaixo			();
+	void mover_direita			();
+	void mover_esquerda			();
+
+	void atualizar_posicao		(int, int);
+
+
 #endif // TELA_H_
